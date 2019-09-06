@@ -46,3 +46,27 @@ function time_elapsed_string($datetime, $full = false)
 
     return $string ? implode(', ', $string) . ' назад' : 'только что';
 }
+
+/**
+ * Склонение строки
+ *
+ * decliner(10, ['товар', 'товара', 'товаров']);
+ * @param $cnt
+ * @param $words
+ * @param $implode
+ * @return string
+ */
+function decliner($cnt, $words, $implode)
+{
+    $cnt__ = $cnt;
+    $cnt = abs($cnt) % 100;
+    $n1 = $cnt % 10;
+
+    if ($cnt > 10 && $cnt < 20)
+        return $implode === true ? $cnt__ . ' ' . $words[2] : $words[2];
+    else if ($n1 > 1 && $n1 < 5)
+        return $implode === true ? $cnt__ . ' ' . $words[1] : $words[1];
+    else if ($n1 == 1)
+        return $implode === true ? $cnt__ . ' ' . $words[0] : $words[0];
+    return $implode === true ? $cnt__ . ' ' . $words[2] : $words[2];
+}
